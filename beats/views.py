@@ -222,7 +222,7 @@ def iniciar_pago(request):
             'Authorization': f'Bearer {access_token}',
             'Content-Type': 'application/json',
             'X-Integrator-Id': integrator_id,
-            'Referer': '',  # Cambia esto a tu dominio real
+            'Referer': 'https://antushop-antu.koyeb.app/',  # Cambia esto a tu dominio real
         }
 
         response = requests.post(url, data=json.dumps(preference_data), headers=headers)

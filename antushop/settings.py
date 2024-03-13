@@ -14,7 +14,7 @@ SECRET_KEY = 'django-insecure-)=skq-3k!ocui$^m#to+n)&waja(17u4+z(eq4#%r8zmb%m)*-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['https://antushop-antu.koyeb.app/']
 
 
 # Application definition
@@ -74,7 +74,6 @@ DATABASES = {
         'PORT': '5432',
     }
 }
-
 
 
 # Password validation
