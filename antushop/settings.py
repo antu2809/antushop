@@ -67,11 +67,11 @@ WSGI_APPLICATION = 'antushop.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('DB_NAME'),
-        'USER': os.getenv('DB_USER'),
-        'PASSWORD': os.getenv('DB_PASSWORD'),
-        'HOST': os.getenv('DB_HOST'),
-        'PORT': os.getenv('DB_PORT'),
+        'NAME': 'antushop',
+        'USER': 'francisco',
+        'PASSWORD': 'px30nYVReNgb7Vtmicr7zXBWRfooPoux',
+        'HOST': 'dpg-cnopshv109ks73b9p1jg-a.oregon-postgres.render.com',
+        'PORT': '5432',
     }
 }
 
