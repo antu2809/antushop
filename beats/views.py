@@ -138,9 +138,12 @@ def tienda(request):
 
 @login_required
 def iniciar_pago(request):
+    client_id = settings.MERCADO_PAGO_CLIENT_ID
+    client_secret = settings.MERCADO_PAGO_CLIENT_SECRET
     if request.method == 'POST':
         # Realizar solicitud a MercadoPago
         access_token = settings.MERCADOPAGO_ACCESS_TOKEN
+        
         # Imprimir todos los datos del formulario POST para asegurarte de que no falte ninguno
         print("Datos del formulario POST:", request.POST.dict())
         # Obtener los datos del pagador y los productos del formulario POST
@@ -211,7 +214,7 @@ def iniciar_pago(request):
             'notification_url': '/webhook/',
             'external_reference': 'antualmonacid@gmail.com',
             'payment_methods': {
-                'installments': 6,
+                'installments': 2,
             },
         }
 
