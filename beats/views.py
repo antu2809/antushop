@@ -225,7 +225,7 @@ def iniciar_pago(request):
             'Authorization': f'Bearer {access_token}',
             'Content-Type': 'application/json',
             'X-Integrator-Id': integrator_id,
-            'Referer': 'antushop-dev-nabt.4.us-1.fl0.io/' , 
+            'Referer': '*' , 
         }
 
         response = requests.post(url, data=json.dumps(preference_data), headers=headers)
