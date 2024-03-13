@@ -4,17 +4,18 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+import environ
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
+env = environ.Env()
 
-# SECURITY WARNING: keep the secret key used in production secret!
+environ.Env.read_env()
+
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['*'] 
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -64,17 +65,26 @@ WSGI_APPLICATION = 'antushop.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+'''
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'antushop',
-        'USER': 'francisco',
-        'PASSWORD': 'px30nYVReNgb7Vtmicr7zXBWRfooPoux',
-        'HOST': 'dpg-cnopshv109ks73b9p1jg-a.oregon-postgres.render.com',
+        'NAME': 'antu',
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': 'localhost',
         'PORT': '5432',
     }
 }
+'''
 
+import dj_database_url
+
+DATABASES = {
+    
+    'default': dj_database_url.parse(env('DATABASE_URL'))
+    
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
