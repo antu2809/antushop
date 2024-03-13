@@ -1,0 +1,18 @@
+<!-- cambiar_contrasena.html -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Cambiar Contraseña
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Cambiar Contraseña</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Guardar Nueva Contraseña</button>
+    </form>
+</div>
+{% endblock %}

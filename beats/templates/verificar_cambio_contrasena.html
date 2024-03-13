@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Verificar Cambio de Contraseña
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Verificar Cambio de Contraseña</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Guardar Nueva Contraseña</button>
+    </form>
+</div>
+{% endblock %}

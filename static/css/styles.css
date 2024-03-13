@@ -1,0 +1,925 @@
+@font-face {
+    font-family: 'MateSC-Regular';
+    src: url('/static/fonts/MateSC-Regular.ttf') format('opentype');
+}
+
+/* Estilos para el fondo */
+body {
+    background-color: white;
+    font-family: 'MateSC-Regular', Helvetica;
+}
+
+/* Estilos para el Navbar */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%; /* Ocupar todo el ancho */
+    z-index: 1000; /* Asegurar que esté por encima de otros elementos */
+    padding: 15px 30px;
+    background-color: #c6c8ce;
+    border-bottom: 1px solid #ddd;
+}
+
+/*Estilos para la tienda*/
+
+.container mt-5 {
+    padding-bottom: 300px; /* Ajusta el valor según sea necesario para evitar la superposición del footer */
+}
+
+
+
+.beats-section, .samples-section {
+    z-index: 2;  /* o cualquier valor superior según sea necesario */
+    margin-top: 0px;
+    background-color: #c6c8ce;
+    color: white;
+    padding: 40px;
+    text-align: center;
+}
+
+
+/*Estilos para el footer*/
+.footer {
+    position: fixed;
+    bottom: 0; /* Fija el footer en la parte inferior */
+    left: 0;
+    width: 100%; /* Ocupa el ancho completo */
+    background-color: #c6c8ce;
+    color: white;
+    text-align: center;
+    z-index: 1002;  /* Asegura que esté por encima de otros elementos si es necesario */
+    padding-top: 10px;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-around;
+    
+}
+
+.footer h3 {
+    font-size: 1.5em;
+    margin-bottom: 5px;
+}
+
+.contact-info,
+.social-media,
+.legal-links {
+    flex: 1 1 100%;
+    
+}
+
+.contact-info p {
+    
+    font-size: 1em;
+}
+
+.social-media ul,
+.legal-links ul {
+    list-style: none;
+    padding: 0;
+}
+
+.social-media ul li,
+.legal-links ul li {
+    margin-bottom: 10px;
+}
+
+.social-media a,
+.legal-links a {
+    color: white;
+    text-decoration: none;
+}
+
+.social-media a img,
+.legal-links a img {
+    width: 20px; /* Tamaño ajustable de los logos */
+    height: auto;
+    margin-right: 10px;
+}
+
+.social-media a:hover,
+.legal-links a:hover {
+    color: #ccc;
+}
+
+
+.h5 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #0b0a0a; /* Color del texto, ajusta según tu diseño */
+}
+
+/* Estilos para los botones */
+.btn-primary {
+    background-color: rgb(0, 15, 57); /* Color representativo de "Tienda Azul" */
+    border-color: rgb(26, 26, 26)
+}
+
+/* Estilos para los botones  */
+ .btn-success {
+    background-color: rgb(0, 0, 0);
+    border-color: rgb(83, 84, 84);
+}
+
+/* Estilos para los botones en hover (cuando se pasa el mouse sobre ellos) */
+ .btn-success:hover {
+    background-color: rgb(0, 0, 0); /* Color ligeramente más claro en hover */
+    border-color: rgb(37, 37, 37);
+}
+
+/* Agrega estilos para centrar elementos verticalmente y horizontalmente */
+.container {
+    /*flex-direction: column;
+    align-items: center;  Centra horizontalmente 
+    justify-content: center; Centra verticalmente */
+    height: 100vh; /* Establece la altura al 100% del viewport */
+}
+
+/* Estilos para el botón principal */
+.product-body {
+    text-align: center; /* Centra el texto dentro del contenedor */
+}
+
+/* Estilos para el botón "Pagar la compra" */
+#abrirTiendaModal {
+    margin-top: 20px; /* Espacio superior */
+}
+
+/* Estilo para el fondo oscuro */
+.modal-background {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1;
+}
+
+/* Estilo para el modal */
+.modal-content {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    z-index: 2;
+}
+
+#carrito-container {
+    background-color: #f8f9fa;
+    padding: 5px;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+}
+
+#carrito-content {
+    margin-top: 10px;
+}
+
+.list-group {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+/* Estilos generales para el carrito */
+.carrito-dropdown {
+    padding: 20px;
+    max-width: 300px; /* Ancho máximo del carrito en pantallas más pequeñas */
+}
+
+/* Agrega estilos personalizados aquí */
+.logo-container {
+    cursor: pointer;
+}
+
+.search-container {
+    position: relative;
+    display: inline-block; /* Asegura que el contenedor ocupe solo el espacio necesario */
+}
+
+.search-icon {
+    cursor: pointer;
+}
+
+.search-form {
+    position: relative;
+    display: flex; /* Añadido para asegurar que el formulario ocupe el ancho completo */
+}
+
+.search-input {
+    display: block;
+    /* Mantén el estilo del input según sea necesario */
+}
+
+.search-btn {
+    cursor: pointer;
+    /* Añade estilos adicionales según tu diseño */
+}
+
+.nav-menu {
+    list-style-type: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    z-index: 1001;
+}
+
+li {
+    margin-right: 10px;
+}
+
+a {
+    text-decoration: none;
+    color: #000000;
+    padding: 10px 15px; /* Añade algún relleno para mejorar la separación entre elementos */
+    display: inline-block; /* Asegura que cada enlace se muestre en una línea separada */
+}
+
+a:hover {
+    color: rgb(4, 4, 4);
+}
+
+
+
+/* Estilos para iPhone 12 Pro (390x844) */
+@media only screen and (max-width: 390px) {
+    .container.main-container.mt-5 {
+        padding-bottom: 100px; /* Ajusta el valor según sea necesario para evitar la superposición del footer */
+        padding-bottom: 200px; /* Ajusta el valor según sea necesario para evitar la superposición del footer */
+    }
+    
+    .carrito-dropdown {
+        max-width: 100%; /* Utiliza el ancho completo en dispositivos más estrechos */
+    }
+    /* Estilos específicos para el navbar en dispositivos móviles */
+    /* Ocultar el menú y mostrar el burger menu */
+    
+    .banner-container {
+        margin-top: 150px;
+        position: relative;
+        width: 100%;
+        height: 300px; 
+        overflow: visible;
+        z-index: 1; /* Mayor que el z-index de la sección de plugins */
+    }
+    
+
+    .banner-container img {
+        width: 100%;
+        height: 75%;
+    }
+
+    .banner-text h2 {
+        font-size: 1.8em; /* Reducir el tamaño del título */
+    }
+
+    .banner-text p {
+        font-size: 1em; /* Reducir el tamaño del texto */
+        margin-bottom: 15px; /* Ajustar el margen inferior */
+    }
+
+    .banner-btn {
+        font-size: 1em; /* Reducir el tamaño del botón */
+        padding: 8px 16px; /* Ajustar el padding del botón */
+    }
+
+    .footer {
+        font-size: 0.8em; /* Modificar el tamaño del texto */
+    }
+}
+
+/* Estilos para iPad (768x1024) */
+@media only screen and (min-width: 391px) and (max-width: 768px) {
+    .container.main-container.mt-5 {
+        padding-bottom: 100px; /* Ajusta el valor según sea necesario para evitar la superposición del footer */
+        padding-bottom: 200px; /* Ajusta el valor según sea necesario para evitar la superposición del footer */
+    }
+    
+    .carrito-dropdown {
+        max-width: 70%; /* Ajusta el ancho para pantallas de tamaño mediano */
+    }
+    
+    .banner-container {
+        position: relative;
+        margin-top: 150px;
+        width: 100%;
+        height: 350px; 
+        overflow: visible;
+        z-index: 2; /* Mayor que el z-index de la sección de plugins */
+    }
+    .banner-container img {
+        width: 100%;
+        height: 75%;
+    }
+    .footer {
+        font-size: 1em; /* Modificar el tamaño del texto */
+    }
+}
+
+/* Estilos para MacBook Pro (1440x900) */
+@media only screen and (min-width: 769px) and (max-width: 1440px) {
+    .container.main-container.mt-5 {
+        padding-bottom: 100px; /* Ajusta el valor según sea necesario para evitar la superposición del footer */
+        padding-bottom: 200px; /* Ajusta el valor según sea necesario para evitar la superposición del footer */
+    }
+    
+    .carrito-dropdown {
+        max-width: 50%; /* Ajusta el ancho para pantallas más grandes */
+    }
+    
+    .banner-container {
+        position: relative;
+        margin-top: 150px;
+        width: 100%;
+        height: 450px;
+        overflow: visible;
+        z-index: 2; /* Mayor que el z-index de la sección de plugins */
+    }
+    .banner-container img {
+        width: 100%;
+        height: 75%; /* Mantener la proporción de la imagen */
+    }
+
+    .banner-text h2 {
+        font-size: 3em; /* Aumentar el tamaño del título para pantallas más grandes */
+    }
+
+    .banner-text p {
+        font-size: 1.5em; /* Aumentar el tamaño del texto para pantallas más grandes */
+        margin-bottom: 25px; /* Ajustar el margen inferior */
+    }
+
+    .banner-btn {
+        font-size: 1.5em; /* Aumentar el tamaño del botón para pantallas más grandes */
+        padding: 12px 24px; /* Ajustar el padding del botón */
+    }
+    .footer {
+        font-size: 1.2em; /* Modificar el tamaño del texto */
+        position: fixed;
+    }
+}
+
+
+/* EStilos para el banner principal*/
+
+.banner-container {
+    position: relative;
+    margin-top: 150px;
+    width: 100%;
+    height: 400px;
+    overflow: visible;
+    z-index: 1; /* Mayor que el z-index de la sección de plugins */
+}
+
+.banner-container img {
+    width: 100%;
+    height: 75%;
+}
+
+
+.platform-logo {
+    width: 100px;
+}
+
+
+.banner-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #fff;
+}
+
+.banner-text h2 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.banner-text p {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+.banner-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    text-decoration: none;
+    background-color: rgb(0, 0, 0, 0.8);
+    color: #fff;
+    border-radius: 25px;
+}
+
+.banner-btn:hover {
+    background-color: #1e1e1e;
+}
+
+.banner-text ul {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+    display: flex; /* Utiliza Flexbox para alinear los elementos horizontalmente */
+    justify-content: center; /* Centra los elementos horizontalmente */
+}
+
+.banner-text li {
+    margin-right: 4px;
+}
+
+.banner-text li:last-child {
+    margin-right: 0;
+}
+
+.banner-text li a img {
+    width: 100%;
+    height: 75%;
+}
+
+
+
+/* Ajustes para el Modal del banner */
+.links-container {
+    transition: opacity 0.3s ease-in-out; /* Añade un efecto de transición suave para una apariencia más agradable */
+    display: none;
+    position: absolute;
+    top: 60%; /* Ajusta la posición vertical según tu diseño */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgb(3.1, 55.7, 60.4, 0.9); /* Color de fondo con transparencia, ajusta según tu diseño */
+    padding: 20px; /* Ajusta el espaciado interno según tu diseño */
+    border-radius: 10px;
+    width: 80%; /* Ajusta el ancho según tu diseño */
+    text-align: center;
+    color: #fff; /* Color del texto, ajusta según tu diseño */
+}
+.links-container img{
+    width: 100%;
+    height: auto;
+}
+.links-container.active {
+    display: block;
+}
+
+
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul li {
+    display: inline-block; /* Hace que los elementos de la lista se muestren en línea uno al lado del otro */
+    margin-right: 10px;
+}
+
+/* Opcional: ajusta el color del enlace y su estilo */
+.links-container a {
+    color: #f3f3f3; /* Color del enlace, ajusta según tu diseño */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.links-container a:hover {
+    color: #e7e7e7;
+}
+
+/* Estilos para la sección de Plugins */
+.plugins-section {
+    margin-top: 10px;
+    background-color: #c6c8ce;
+    color: white;
+    padding: 40px;
+    text-align: center;
+    z-index: 0; /* Asegura que la sección de plugins esté por debajo del banner principal */
+}
+
+.plugins-section h1 {
+    font-size: 2em;
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.card {
+    width: 300px;
+    height: 320px;
+    background-color: #c6c8ce;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: opacity 0.3s ease;
+    position: relative; /* Agregar posición relativa para el posicionamiento del reproductor de audio */
+}
+
+.card:hover {
+    opacity: 0.8;
+}
+
+.card img {
+    width: 50%;
+    height: auto;
+    position: relative;
+    top: 5%;
+    left: 25%;
+    margin-bottom: 20px;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+/* Estilos para el reproductor de audio */
+.card audio {
+    width: 100%; /* Ajustar el ancho del reproductor de audio */
+    margin-bottom: 10px;
+}
+
+/* Estilos para el botón "Agregar al carrito" */
+.card .agregar-carrito {
+    display: block; /* Cambiar a bloque para que ocupe todo el ancho disponible */
+    width: 100%; /* Ajustar el ancho del botón al 100% */
+    padding: 10px 0; /* Agregar relleno al botón */
+    background-color: #c6c8ce; /* Cambiar el color de fondo */
+    color: #fff; /* Cambiar el color del texto */
+    border: none; /* Quitar el borde */
+    border-radius: 4px; /* Agregar bordes redondeados */
+    cursor: pointer; /* Cambiar el cursor al pasar sobre el botón */
+    text-align: center; /* Alinear el texto al centro */
+    text-decoration: none; /* Quitar subrayado del texto */
+    transition: background-color 0.3s ease; /* Agregar transición al color de fondo */
+}
+
+.card .agregar-carrito:hover {
+    background-color: rgb(0, 15, 57); /* Cambiar el color de fondo al pasar el mouse */
+}
+
+
+.play-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 10px;
+}
+
+.play-sample, .buy-button {
+    padding: 8px 20px;
+    font-size: 1em;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.play-sample:hover, .buy-button:hover {
+    background-color: #c6c8ce;
+    color: white;
+}
+
+/* Estilos para la ventana emergente de compra */
+.purchase-options-container {
+    display: none;
+    top: 30px; /* Ajusta según la posición deseada */
+    left: 0;
+    z-index: 999; /* Asegura que esté por encima de otros elementos */
+    background-color: #c6c8ce; /* Color de fondo para las opciones de compra */
+    padding: 10px;
+    /* Otros estilos según tus necesidades */
+}
+
+.toggle-buy:checked ~ .purchase-options-container {
+    display: block;
+}
+
+.options-list {
+    list-style-type: none;
+    padding: 0;
+    text-align: center;
+}
+
+.options-list li {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.options-list li:hover {
+    color: #eee;
+}
+
+.add-to-cart-button {
+    padding: 10px 20px;
+    font-size: 1em;
+    background-color: #c6c8ce;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-to-cart-button:hover {
+    background-color: #c6c8ce;
+}
+
+
+/* Estilos para la sección de Beats */
+.beats-section {
+    margin-top: 0px;
+    background-color: #c6c8ce;
+    color: white;
+    padding: 40px;
+    text-align: center;
+}
+
+.beats-section h1 {
+    font-size: 2em;
+}
+
+/* Estilos para las tarjetas de beats */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+
+.card:hover {
+    opacity: 0.8;
+}
+
+.card img {
+    width: 50%;
+    height: auto;
+    position: relative;
+    top: 5%;
+    left: 25%;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.play-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 10px;
+}
+
+.play-sample, .buy-button {
+    padding: 8px 20px;
+    font-size: 1em;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.play-sample:hover, .buy-button:hover {
+    background-color: #c6c8ce;
+    color: white;
+}
+
+/* Estilos para la ventana emergente de compra de beats */
+.purchase-options-container {
+    display: none;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 999;
+    background-color: #c6c8ce;
+    padding: 10px;
+    width: 200px;
+}
+
+.toggle-beat-buy:checked ~ .purchase-options-container {
+    display: block;
+}
+
+.options-list {
+    list-style-type: none;
+    padding: 0;
+    text-align: center;
+}
+
+.options-list li {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.options-list li:hover {
+    color: #eee;
+}
+
+.add-to-cart-button {
+    padding: 10px 20px;
+    font-size: 1em;
+    background-color: #c6c8ce;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-to-cart-button:hover {
+    background-color: #555;
+}
+
+/* Estilos para la sección de Samples */
+.samples-section {
+    padding-bottom: 100px; 
+    margin-top: 20px;
+    background-color: #c6c8ce;
+    color: white;
+    padding: 40px;
+    text-align: center;
+    z-index: 0;
+    margin-bottom: 150px;
+}
+
+.samples-section h1 {
+    font-size: 2em;
+}
+
+/* Estilos para el contenedor principal del carrito */
+.carrito-container {
+    margin-top: 120px; /* Ajustar según la altura del header */
+    max-width: 800px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+    max-height: 250px; /* Ajustar la altura máxima según sea necesario */
+    overflow-y: auto; /* Agregar scroll vertical si el contenido es demasiado grande */
+}
+
+/* Estilos para el título del carrito */
+.carrito-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+/* Estilos para la lista de elementos del carrito */
+.carrito-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.carrito-item {
+    margin-bottom: 15px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+
+.carrito-item img {
+    width: 100px;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+/* Estilos para el botón de eliminar */
+.eliminar-carrito {
+    background-color: #ff0000;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.eliminar-carrito:hover {
+    background-color: #cc0000;
+}
+
+/* Estilos para el formulario de detalles del pagador */
+.pagador-form {
+    margin-top: 20px;
+}
+
+.pagador-form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.pagador-form input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+}
+
+.pagador-form button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.pagador-form button:hover {
+    background-color: #0056b3;
+}
+
+/* Estilos para el contenedor principal del formulario de inicio de sesión */
+.login-container {
+    margin-top: 120px; /* Ajustar según la altura del header */
+    margin-bottom: 50px; /* Ajustar según la altura del footer */
+    max-width: 400px; /* Ajustar según el diseño deseado */
+    padding: 20px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+}
+
+/* Estilos para el título del formulario de inicio de sesión */
+.login-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+/* Estilos para el formulario de inicio de sesión */
+.login-form {
+    margin-top: 20px;
+}
+
+.login-form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+}
+
+.login-form button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.login-form button:hover {
+    background-color: #0056b3;
+}
+
+/* Estilos para el contenedor principal del formulario de registro */
+.registro-container {
+    margin-top: 120px; /* Ajustar según la altura del header */
+    max-width: 800px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+    max-height: 300px; /* Ajustar la altura máxima según sea necesario */
+    overflow-y: auto; /* Agregar scroll vertical si el contenido es demasiado grande */
+}
+
+/* Estilos para el título del formulario de registro */
+.registro-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+/* Estilos para el formulario de registro */
+.registro-form {
+    margin-top: 20px;
+}
+
+.registro-form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.registro-form input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+}
+
+.registro-form button {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.registro-form button:hover {
+    background-color: #218838;
+}

@@ -1,0 +1,20 @@
+<!-- iniciar_sesion.html -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Iniciar Sesión
+{% endblock %}
+
+{% block content %}
+<div class="login-container">
+    <h1 class="login-title">Iniciar Sesión</h1>
+    <form class="login-form" method="post" action="{% url 'iniciar_sesion' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Iniciar Sesión</button>
+    </form>
+    <!-- Enlace para acceder a cambiar contraseña -->
+    <p>¿Olvidaste tu contraseña? <a href="{% url 'cambiar_contrasena' %}">Cambiar contraseña</a></p>
+</div>
+{% endblock %}

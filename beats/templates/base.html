@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}Antu Shop{% endblock %}</title>
+    <!-- Tus estilos y scripts comunes aquí -->
+    {% load static %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
+</head>
+<body>
+    <header>
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="logo-container">
+                <a class="navbar-brand" href="{% url 'tienda' %}">Antu Shop</a>
+            </div>
+        
+            <!-- Botón del "burger menu" para dispositivos móviles -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        
+            <div class="search-container">
+                <form class="search-form" onsubmit="performSearch(); return false;">
+                    <input type="text" class="search-input" id="searchInput" placeholder="Buscar..."> 
+                    <div class="search-btn" onclick="performSearch()">
+                        <!-- Icono de búsqueda -->
+                        <span><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" /><path d="M21 21l-6 -6" /></svg></span>
+                    </div>
+                </form>
+            </div>
+        
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li><a href="{% url 'tienda' %}">Home</a></li>
+                    <li><a href="{% url 'tienda' %}">Musica</a></li>
+                    <li><a href="{% url 'tienda' %}">Beats</a></li>
+                    <li><a href="{% url 'tienda' %}">Samples</a></li>
+                    <!-- Sección para mostrar el carrito -->
+                    <li class="nav-item">
+                        <div id="carrito-container">
+                            <a href="/carrito/ver/" class="btn btn-primary">Ver Carrito</a><!-- Botón para ver el carrito -->
+                        </div>
+                    </li>
+                    {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="btn btn-primary" href="{% url 'cerrar_sesion' %}">Cerrar sesión</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="btn btn-primary" href="{% url 'iniciar_sesion' %}">Iniciar Sesión</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-primary" href="{% url 'registro' %}">Registrarse</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+    </header>
+    
+    
+    <!-- Contenido específico de la plantilla secundaria -->
+    <div class="container mt-5">
+        {% block content %}{% endblock %}
+    </div>
+    
+    
+    <!-- Contenido del footer -->
+    <footer class="footer">
+         <div class="footer-container">
+            <div class="contact-info">
+                <h3>Contact Information</h3>
+                <p>Email: franciscoantualmonacid@gmail.com</p>
+            </div>
+            <div class="social-media">
+                <h3>Follow Us</h3>
+                <ul>
+                    <li><a href="https://www.instagram.com/antu.beats/" class="platform-logo"><img src="{% static 'img/Instagram_Glyph_Black.png' %}" alt="Instagram"></a></li>
+                </ul>
+            </div>
+
+        </div>
+    </footer> 
+    
+    <script>
+        function performSearch() {
+            // Obtén el término de búsqueda
+            var searchTerm = document.getElementById('searchInput').value;
+    
+            // Realiza la redirección según el término de búsqueda
+            switch (searchTerm) {
+                case 'home':
+                case 'musica':
+                case 'beats':
+                case 'samples':
+                    window.location.href = searchUrl;
+                    break;
+                default:
+                    // Si no coincide con ninguna categoría, redirige a una página de resultados generales
+                    window.location.href = "/resultados?search=" + encodeURIComponent(searchTerm);
+                    break;
+            }
+        }
+    </script>
+</body>
+</html>

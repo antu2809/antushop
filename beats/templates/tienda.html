@@ -1,0 +1,105 @@
+<!-- tienda.html -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Tienda
+{% endblock %}
+
+{% block content %}
+<main>
+    <!-- Banner Principal -->
+    <div class="banner-container">
+        <img src="{% static 'img/waves.jpg' %}" alt="Antu Waves">
+        <div class="banner-text">
+            <h2>Antu waves</h2>
+            <p>Escúchalo ahora</p>
+            <ul>
+                <li><a href="https://www.youtube.com/watch?v=Bvbv5DI3jGY&list=PLR0uN87SdFHstuo3u2f3bGeSRbxct7OvG" class="platform-logo"><img src="{% static 'img/yt_logo_mono_light.png' %}" alt="Youtube"></a></li>
+                <li><a href="https://open.spotify.com/intl-es/album/4jwuros5aWLTliVAfGuP7c?si=f7o7SKKFT5eJQkFwgBaq9g" class="platform-logo"><img src="{% static 'img/Spotify.png' %}" alt="Spotify"></a></li>
+                <li><a href="https://soundcloud.com/antu-ssp" class="platform-logo"><img src="{% static 'img/soundCloud.png' %}" alt="SoundCloud"></a></li>
+                <!--  más plataformas según sea necesario -->
+            </ul>
+            <!--<a href="#" class="banner-btn" id="toggleLinks">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-player-play" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                    <path d="M7 4v16l13 -8z" />
+                </svg>
+            </a> -->
+        </div>
+    </div>
+    <h1>Tienda</h1>
+    <div class="container mt-5">
+        <div class="card-grid">
+            <!-- Contenido de la tienda -->
+            {% for producto in beats %}
+                <div class="card">
+                    <h3>{{ producto.name }}</h3>
+                    <img src="{{ producto.image.url }}" alt="{{ producto.name }}" style="width: 100px;">
+                    <p>{{ producto.description }}</p>
+                    <p>Precio: ${{ producto.price_multitrack }}</p>
+                    <!-- Reproductor de audio para la previsualización -->
+                    {% if producto.audio_preview %}
+                    <audio controls controlsList="nodownload">
+                        <source src="{{ producto.audio_preview.url }}" type="audio/wav">
+                        Tu navegador no soporta el elemento de audio.
+                    </audio>
+                    {% endif %}
+                    <div id="boton-container-{{ producto.id }}">
+                        {% if producto_en_carrito %}
+                            <a href="/carrito/ver/" class="btn btn-primary">Ver Carrito</a><!-- Botón para ver el carrito -->
+                        {% else %}
+                            <button class="agregar-carrito" data-producto-id="{{ producto.id }}" data-producto-model="beat">Agregar al carrito</button>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</main>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://www.mercadopago.com/v2/security.js" view="home"></script>
+    <script src="https://sdk.mercadopago.com/js/v2"></script>    
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Función para enviar solicitud POST al servidor al hacer clic en "Agregar al carrito"
+            document.querySelectorAll('.agregar-carrito').forEach(button => {
+                button.addEventListener('click', function() {
+                    const productoId = this.getAttribute('data-producto-id');
+                    const productoModel = this.getAttribute('data-producto-model');
+                    fetch(`/carrito/agregar/${productoId}/${productoModel}/`, {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRFToken': '{{ csrf_token }}',
+                        },
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            return response.text();
+                        }
+                        throw new Error('Error al agregar al carrito');
+                    })
+                    .then(data => {
+                        // Actualizar la vista del carrito
+                        fetch('/carrito/ver/')
+                        .then(response => response.text())
+                        .then(data => {
+                            document.getElementById('carrito-contenido').innerHTML = data;
+                        });
+        
+                        // Cambiar el contenido del botón a "Ver carrito"
+                        const botonContainer = document.getElementById(`boton-container-${productoId}`);
+                        botonContainer.innerHTML = '<a href="/carrito/ver/" class="btn btn-primary">Ver Carrito</a>';
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+                });
+            });
+        });
+    </script>
+{% endblock %}

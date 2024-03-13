@@ -1,0 +1,113 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proceso de Pago</title>
+    <script src="https://www.mercadopago.com/v2/security.js" view="home"></script>
+    <script src="https://sdk.mercadopago.com/js/v2"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Realizar Pago</h1>
+    <!-- Mostrar detalles del pagador -->
+    <h2>Detalles del Pagador:</h2>
+    <p>Nombre: {{ pagador_name }}</p>
+    <p>Apellido: {{ pagador_surname }}</p>
+    <p>Email: {{ pagador_email }}</p>
+    <p>Código de Área: {{ pagador_area_code }}</p>
+    <p>Número de Teléfono: {{ pagador_phone_number }}</p>
+    <p>Calle: {{ pagador_street_name }} {{ pagador_street_number }}</p>
+    <p>Código Postal: {{ pagador_zip_code }}</p>
+
+    <!-- Mostrar detalles de los productos -->
+    <h2>Detalles del Producto:</h2>
+    <ul>
+        {% for item in productos %}
+            <li>{{ item.title }} - Cantidad: {{ item.quantity }} - Precio Unitario: {{ item.unit_price }}</li>
+        {% endfor %}
+    </ul>
+
+    <!-- Botón para iniciar el pago -->
+<form id="paymentForm" action="{% url 'iniciar_pago' %}" method="post">
+    {% csrf_token %}
+    <!-- Campos ocultos para enviar los datos del pagador -->
+    <input type="hidden" id="name" value="{{ pagador_name }}">
+    <input type="hidden" id="surname" value="{{ pagador_surname }}">
+    <input type="hidden" id="email" value="{{ pagador_email }}">
+    <input type="hidden" id="area_code" value="{{ pagador_area_code }}">
+    <input type="hidden" id="phone_number" value="{{ pagador_phone_number }}">
+    <input type="hidden" id="street_name" value="{{ pagador_street_name }}">
+    <input type="hidden" id="street_number" value="{{ pagador_street_number }}">
+    <input type="hidden" id="zip_code" value="{{ pagador_zip_code }}">
+    <!-- Campos ocultos para enviar los IDs de los productos y sus cantidades -->
+    {% for item in productos %}
+        <input type="hidden" name="productos[]" value="{{ item.id }}">
+        <input type="hidden" name="cantidades[]" value="{{ item.quantity }}">
+    {% endfor %}
+    <!-- Contenido adicional aquí -->
+    <button id="openPaymentButton" type="button" class="btn btn-primary">Iniciar Pago</button>
+</form>
+
+
+    <script>
+        $(document).ready(function () {
+            const publicKey = "TEST-2ef54212-5399-499f-a030-d06f3df300b7";
+            // Agregar un evento click al botón para iniciar el pago
+            $('#openPaymentButton').click(function () {
+                // Obtener el token CSRF
+                var csrftoken = $('[name=csrfmiddlewaretoken]').val();
+                // Obtener los valores del formulario del pagador
+                const pagador_name = $('#name').val();
+                const pagador_surname = $('#surname').val();
+                const pagador_email = $('#email').val();
+                const pagador_area_code = $('#area_code').val();
+                const pagador_phone_number = $('#phone_number').val();
+                const pagador_street_name = $('#street_name').val();
+                const pagador_street_number = $('#street_number').val();
+                const pagador_zip_code = $('#zip_code').val();
+                // Obtener los IDs de los productos y sus cantidades
+                var productos = [];
+                var cantidades = [];
+                $('.producto-id').each(function() {
+                    productos.push($(this).val());
+                });
+                $('.cantidad').each(function() {
+                    cantidades.push($(this).val());
+                });
+        
+                // Realizar una solicitud AJAX para obtener el init_point
+                $.ajax({
+                    url: "{% url 'iniciar_pago' %}",
+                    type: 'POST',
+                    headers: { "X-CSRFToken": csrftoken },
+                    data: {
+                        name: pagador_name,
+                        surname: pagador_surname,
+                        email: pagador_email,
+                        area_code: pagador_area_code,
+                        phone_number: pagador_phone_number,
+                        street_name: pagador_street_name,
+                        street_number: pagador_street_number,
+                        zip_code: pagador_zip_code,
+                        productos: productos,
+                        cantidades: cantidades
+                    },
+                    success: function (response) {
+                        console.log('Respuesta de la vista:', response);
+                        // Redirigir al usuario a la página de pago de MercadoPago
+                        window.location.href = response;
+                    },
+                    error: function (xhr, status, error) {
+                        console.log('Error al obtener el init_point:', error);
+                    }
+                });
+
+            });
+        });
+        
+    </script>
+</body>
+</html>

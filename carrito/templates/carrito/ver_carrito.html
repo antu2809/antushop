@@ -1,0 +1,90 @@
+<!-- carrito/ver_carrito.html -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Ver Carrito
+{% endblock %}
+
+{% block content %}
+<main>
+    <div class="carrito-container">
+        <h1 class="carrito-title">Carrito de Compras</h1>
+        <ul class="carrito-list">
+            {% for item in carrito %}
+                <li>
+                    <!-- Mostrar la imagen del producto -->
+                    <img src="{{ item.producto.image.url }}" alt="{{ item.producto.name }}" style="width: 100px;">
+                    {{ item.producto.name }} - Cantidad: {{ item.cantidad }} - ID: {{ item.id }}
+                     <button class="eliminar-carrito" data-item-id="{{ item.id }}">Eliminar</button>
+                </li>
+            {% endfor %}
+        </ul>
+        <p>Total: ${{ total }}</p>
+
+        <form action="{% url 'iniciar_pago' %}" method="post" class="pagador-form">
+            {% csrf_token %}
+            <!-- Campos de detalles del pagador -->
+            <label for="name">Nombre:</label>
+            <input type="text" id="name" name="name" value="{{ pagador.name }}">
+            <br>
+            <label for="surname">Apellido:</label>
+            <input type="text" id="surname" name="surname" value="{{ pagador.surname }}">
+            <br>
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email" value="{{ pagador.email }}">
+            <br>
+            <label for="area_code">Código de Área:</label>
+            <input type="text" id="area_code" name="area_code" value="{{ pagador.area_code }}">
+            <br>
+            <label for="phone_number">Número de Teléfono:</label>
+            <input type="text" id="phone_number" name="phone_number" value="{{ pagador.phone_number }}">
+            <br>
+            <label for="street_name">Calle:</label>
+            <input type="text" id="street_name" name="street_name" value="{{ pagador.street_name }}">
+            <br>
+            <label for="street_number">Número de Calle:</label>
+            <input type="text" id="street_number" name="street_number" value="{{ pagador.street_number }}">
+            <br>
+            <label for="zip_code">Código Postal:</label>
+            <input type="text" id="zip_code" name="zip_code" value="{{ pagador.zip_code }}">
+            <br>
+            <!-- Campos de detalles del producto -->
+            {% for item in carrito %}
+                <input type="hidden" name="productos[]" value="{{ item.producto.id }}">
+                <input type="hidden" name="cantidades[]" value="{{ item.cantidad }}">
+            {% endfor %}
+            <br>
+            <button type="submit">Iniciar Pago</button>
+        </form>
+    </div>
+</main>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Función para enviar solicitud POST al servidor al hacer clic en "Eliminar" del carrito
+        document.querySelectorAll('.eliminar-carrito').forEach(button => {
+            button.addEventListener('click', function() {
+                const itemId = this.getAttribute('data-item-id');
+                fetch(`/carrito/eliminar/${itemId}/`, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': '{{ csrf_token }}',
+                    },
+                })
+                .then(response => {
+                    if (response.ok) {
+                        // Recargar la página para actualizar el carrito
+                        window.location.reload();
+                    } else {
+                        throw new Error('Error al eliminar del carrito');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            });
+        });
+    });
+</script>
+
+{% endblock %}

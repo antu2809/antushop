@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+ Pago Pendiente
+{% endblock %}
+
+{% block content %}
+<h1>Pago Pendiente</h1>
+    
+<p>ID de Pago: {{ collection_id }}</p>
+<p>Estado de la Colección: {{ collection_status }}</p>
+<p>External Reference: {{ external_reference }}</p>
+<p>Método de Pago: {{ payment_method_id }}</p>
+{% endblock %}

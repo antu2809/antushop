@@ -1,0 +1,18 @@
+<!-- registro.html -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Registro</title>
+{% endblock %}
+
+{% block content %}
+    <div class="registro-container">
+        <h1 class="registro-title">Registro</h1>
+        <form class="registro-form" method="post" action="{% url 'registro' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Registrarse</button>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fallo en el Pago</title>
+    <script src="https://www.mercadopago.com/v2/security.js" view="home"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+
+</head>
+<body>
+    <h1>Pago Fallido</h1>
+    <p>ID de Pago: {{ collection_id }}</p>
+    <p>Estado de la Colección: {{ collection_status }}</p>
+    <p>External Reference: {{ external_reference }}</p>
+    <p>Método de Pago: {{ payment_method_id }}</p>
+</body>
+</html>

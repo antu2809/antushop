@@ -1,0 +1,13 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Notificación de Pago
+{% endblock %}
+
+{% block content %}
+<h1>Notificación de Pago Checkout Mercado Pago</h1>
+    <p>Se ha completado la simulación de pago.</p>
+    <p>Payment ID: {{ payment_id }}</p>
+{% endblock %}
