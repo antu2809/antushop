@@ -6,8 +6,12 @@ ENV PYTHONUNBUFFERED 1
 WORKDIR /code
 
 COPY requirements.txt /code/
-RUN pip install -r requirements.txt
+RUN pip install --upgrade pip setuptools && pip install -r requirements.txt
+
+# Instalar gunicorn
+RUN pip install gunicorn
 
 COPY . /code/
 
 CMD ["gunicorn", "--bind", "0.0.0.0:8000", "antushop.wsgi:application"]
+

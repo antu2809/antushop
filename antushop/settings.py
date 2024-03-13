@@ -9,12 +9,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-)=skq-3k!ocui$^m#to+n)&waja(17u4+z(eq4#%r8zmb%m)*-'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://antushop-antu.koyeb.app/']
+ALLOWED_HOSTS = ['*'] 
 
 
 # Application definition
@@ -127,11 +127,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Configuración  Access Token de MercadoPago
 # Access Token de Mercado Pago 
-MERCADOPAGO_ACCESS_TOKEN = 'TEST-3821055070142493-091412-1c0a8755d42fbd86eb32f1ea129a7313-398042112'
+MERCADOPAGO_ACCESS_TOKEN = os.getenv('MERCADOPAGO_ACCESS_TOKEN')
 
 #  Client ID y  Client Secret de Mercado Pago 
-MERCADO_PAGO_CLIENT_ID = '3821055070142493'
-MERCADO_PAGO_CLIENT_SECRET = '7FenBduUJfc1jZoFhkttX4QpyIY31vEM'
+MERCADO_PAGO_CLIENT_ID = os.getenv('MERCADO_PAGO_CLIENT_ID')
+MERCADO_PAGO_CLIENT_SECRET = os.getenv('MERCADO_PAGO_CLIENT_SECRET')
 
 
 AUTH_USER_MODEL = 'beats.CustomUser'
@@ -144,7 +144,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587  # Puerto del servidor SMTP (puede variar según el proveedor)
 EMAIL_USE_TLS = True  # Usar TLS para la conexión segura
 EMAIL_HOST_USER = 'franciscoantualmonacid@gmail.com'  # Tu dirección de correo electrónico
-EMAIL_HOST_PASSWORD = 'acuc koja qovb upca'
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL = 'franciscoantualmonacid@gmail.com'  # Dirección de correo electrónico predeterminada para enviar correos electrónicos
 
 load_dotenv()
